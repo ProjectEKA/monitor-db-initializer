@@ -40,7 +40,7 @@
         </addColumn>
     </changeSet>
 
-    <changeSet id="202009281730" author="Dubey" context="POC">
+    <changeSet id="202009281745" author="Dubey" context="POC">
         <addColumn tableName="metrics">
             <column name="bridge_id" type="VARCHAR(256)">
                 <constraints nullable="false"/>
