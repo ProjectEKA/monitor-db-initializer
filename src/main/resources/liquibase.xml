@@ -7,14 +7,23 @@
     <changeSet id="202007101421" author="Apoorva, Sangita" context="POC">
         <preConditions>
             <not>
-                <tableExists tableName="monitor"/>
+                <tableExists tableName="metrics"/>
             </not>
         </preConditions>
-        <comment>Add monitor table</comment>
+        <comment>Add metrics table</comment>
 
         <createTable tableName="metrics">
             <column name="id" autoIncrement="true" type="BIGINT">
                 <constraints primaryKey="true"/>
+            </column>
+            <column name="bridge_id" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(256)">
+                <constraints nullable="false"/>
             </column>
             <column name="path" type="VARCHAR(256)">
                 <constraints nullable="false" unique="true"/>
@@ -22,59 +31,27 @@
             <column name="status" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="last_up_time" type="DATETIME">
-                <constraints nullable="false" />
-            </column>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="202009281734" author="Dubey" context="POC">
-        <dropNotNullConstraint columnName="last_up_time" tableName="metrics"/>  
-    </changeSet>
-
-    <changeSet id="202009281739" author="Dubey" context="POC">
-        <addColumn tableName="metrics">
+            <column name="last_up_time" type="DATETIME"/>                            
             <column name="last_check_time" type="DATETIME">
                 <constraints nullable="false"/>
             </column>
-        </addColumn>
-    </changeSet>
-
-    <changeSet id="202009281745" author="Dubey" context="POC">
-        <addColumn tableName="metrics">
-            <column name="bridge_id" type="VARCHAR(256)">
-                <constraints nullable="false"/>
-            </column>
-        </addColumn>
-    </changeSet>
-
-    <changeSet id="202009281730" author="Dubey" context="POC">
-        <addColumn tableName="metrics">
-            <column name="name" type="VARCHAR(256)">
-                <constraints nullable="false"/>
-            </column>
-        </addColumn>
-    </changeSet>
-
-    <changeSet id="202009281731" author="Dubey" context="POC">
-        <addColumn tableName="metrics">
-            <column name="type" type="VARCHAR(256)">
-                <constraints nullable="false"/>
-            </column>
-        </addColumn>
-    </changeSet>
+        </createTable>
+    </changeSet>        
 
     <changeSet id="202009281740" author="Dubey" context="POC">
         <preConditions>
             <not>
-                <tableExists tableName="metrics_hostory"/>
+                <tableExists tableName="metrics_history"/>
             </not>
         </preConditions>
-        <comment>Add monitor table</comment>    
+        <comment>Add metrics history table</comment>    
 
         <createTable tableName="metrics_history">
             <column name="id" autoIncrement="true" type="BIGINT">
                 <constraints primaryKey="true"/>
+            </column>
+            <column name="bridge_id" type="VARCHAR(256)">
+                <constraints nullable="false"/>
             </column>
             <column name="name" type="VARCHAR(256)">
                 <constraints nullable="false"/>
@@ -83,7 +60,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="path" type="VARCHAR(256)">
-                <constraints nullable="false" unique="true"/>
+                <constraints nullable="false"/>
             </column>
             <column name="status" type="VARCHAR(50)">
                 <constraints nullable="false"/>
