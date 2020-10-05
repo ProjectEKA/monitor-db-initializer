@@ -7,14 +7,23 @@
     <changeSet id="202007101421" author="Apoorva, Sangita" context="POC">
         <preConditions>
             <not>
-                <tableExists tableName="monitor"/>
+                <tableExists tableName="metrics"/>
             </not>
         </preConditions>
-        <comment>Add monitor table</comment>
+        <comment>Add metrics table</comment>
 
         <createTable tableName="metrics">
             <column name="id" autoIncrement="true" type="BIGINT">
                 <constraints primaryKey="true"/>
+            </column>
+            <column name="bridge_id" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(256)">
+                <constraints nullable="false"/>
             </column>
             <column name="path" type="VARCHAR(256)">
                 <constraints nullable="false" unique="true"/>
@@ -22,7 +31,41 @@
             <column name="status" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="last_up_time" type="DATETIME">
+            <column name="last_up_time" type="DATETIME"/>                            
+            <column name="last_check_time" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>        
+
+    <changeSet id="202009281740" author="Dubey" context="POC">
+        <preConditions>
+            <not>
+                <tableExists tableName="metrics_history"/>
+            </not>
+        </preConditions>
+        <comment>Add metrics history table</comment>    
+
+        <createTable tableName="metrics_history">
+            <column name="id" autoIncrement="true" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="bridge_id" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="path" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>            
+            <column name="date_created" type="DATETIME" >
                 <constraints nullable="false" />
             </column>
         </createTable>
