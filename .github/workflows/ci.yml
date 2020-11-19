@@ -14,7 +14,7 @@ jobs:
         with:
           java-version: 1.8
       - name: Set env
-        run: echo ::set-env name=RELEASE_VERSION::$(echo $GITHUB_SHA | head -c7)
+        run: echo "RELEASE_VERSION=$(echo $GITHUB_SHA | head -c7)" >> $GITHUB_ENV
       - name: Build with Maven
         env:
           DOCKER_REGISTRY_URL: docker.io
